@@ -48,13 +48,60 @@
       border-radius: 6px;
       border: 1px solid #ccc;
     }
+    canvas {
+      margin-top: 20px;
+      border: 1px solid #ccc;
+    }
+    .toggle {
+      margin: 10px auto;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      max-width: 300px;
+      background-color: #eee;
+      cursor: not-allowed;
+    }
   </style>
   <script>
     function showSection(id) {
       document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
       document.getElementById(id).classList.add('active');
     }
-    window.onload = () => showSection('contact');
+    window.onload = () => {
+      showSection('contact');
+
+      const canvas = document.getElementById('gameCanvas');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let x = 10;
+        let y = 10;
+        let dx = 2;
+        let dy = 2;
+        function draw() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.beginPath();
+          ctx.arc(x, y, 10, 0, Math.PI * 2);
+          ctx.fillStyle = '#888';
+          ctx.fill();
+          ctx.closePath();
+          if (x + dx > canvas.width - 10 || x + dx < 10) dx = -dx;
+          if (y + dy > canvas.height - 10 || y + dy < 10) dy = -dy;
+          x += dx;
+          y += dy;
+          requestAnimationFrame(draw);
+        }
+        draw();
+      }
+
+      const loading = document.getElementById('loadingMsg');
+      if (loading) {
+        let dotCount = 0;
+        setInterval(() => {
+          dotCount = (dotCount + 1) % 4;
+          loading.innerText = 'Loading' + '.'.repeat(dotCount);
+        }, 500);
+      }
+    }
   </script>
 </head>
 <body>
@@ -67,49 +114,35 @@
     <a href="#" onclick="showSection('terms')">Terms</a>
     <a href="#" onclick="showSection('privacy')">Privacy</a>
     <a href="#" onclick="showSection('unsubscribe')">Unsubscribe</a>
+    <a href="#" onclick="showSection('game')">Game?</a>
+    <a href="#" onclick="showSection('loading')">Loading?</a>
+    <a href="#" onclick="showSection('error404')">404?</a>
+    <a href="#" onclick="showSection('captcha')">CAPTCHA</a>
+    <a href="#" onclick="showSection('settings')">Settings</a>
   </nav>
 
-  <div id="contact" class="section">
-    <h3>Contact Us</h3>
-    <p>We added this form to look professional. It doesn't actually send anywhere.</p>
-    <form onsubmit="event.preventDefault(); alert('Thanks for reaching out. We won’t be in touch.');">
-      <input type="text" placeholder="Your Name (optional, obviously)">
-      <input type="email" placeholder="Email (fake is fine)">
-      <textarea placeholder="Your Message (we won't read it)"></textarea>
-      <button type="submit">Submit (to the void)</button>
-    </form>
+  <div id="game" class="section">
+    <h3>Oops, I Got Distracted</h3>
+    <p>This has no purpose. It's just a circle bouncing around. Like my attention span.</p>
+    <canvas id="gameCanvas" width="300" height="150"></canvas>
   </div>
 
-  <div id="investors" class="section">
-    <h3>Investor Relations</h3>
-    <p>If you're an investor looking to get involved with SlouchTech™, please consider the following:</p>
-    <div style="font-size: 4rem;">🤷</div>
-    <p>We don’t have a business plan. We barely have a plan. But you’re welcome to throw money at us. Email <a href="mailto:toddslouchington@gmail.com">money@uberlazy.lol</a> if you insist.</p>
+  <div id="captcha" class="section">
+    <h3>CAPTCHA Verification</h3>
+    <p>Please prove you are not motivated:</p>
+    <label><input type="checkbox" disabled> I agree to improve myself.</label><br>
+    <label><input type="checkbox" disabled> I will answer emails within 24 hours.</label><br>
+    <label><input type="checkbox" checked readonly> I have no idea what I’m doing and I’m fine with that.</label><br><br>
+    <button onclick="alert('Verification complete. You’re one of us.')">Verify</button>
   </div>
 
-  <div id="terms" class="section">
-    <h3>Terms of Service</h3>
-    <p><strong>1. No Promises:</strong> We make no guarantees that anything will work, ever. That's part of the charm.</p>
-    <p><strong>2. User Responsibility:</strong> If this site causes productivity, that’s on you. Not our fault.</p>
-    <p><strong>3. Intellectual Property:</strong> Everything here is legally dubious and morally lazy.</p>
-    <p><strong>4. Cookies:</strong> We don’t use them. But we do like actual cookies.</p>
-    <p><strong>5. Updates:</strong> This document is updated whenever we feel like it. Probably never.</p>
-    <p>If you’ve read this far, you deserve a nap. That’s the real service we offer.</p>
-  </div>
-
-  <div id="privacy" class="section">
-    <h3>Privacy Policy</h3>
-    <p><strong>We Respect Your Privacy:</strong> We just don’t really track anything, mostly because we don’t know how.</p>
-    <p><strong>No Data Collection:</strong> We wouldn’t know what to do with your data even if we had it.</p>
-    <p><strong>Analytics:</strong> We don't use analytics tools. We're not even sure what people would want to know. Bounce rate? Probably high.</p>
-    <p><strong>Cookies (Still Not the Browser Kind):</strong> Just cookies we snack on while pretending to debug something.</p>
-    <p><em>If anything here changes, we probably won’t tell you.</em></p>
-  </div>
-
-  <div id="unsubscribe" class="section">
-    <h3>Unsubscribe</h3>
-    <p>You have successfully unsubscribed. We’re not sure from what, but it’s over now.</p>
-    <p>If this was a mistake, don’t worry—there’s no going back. Freedom achieved. 🕊️</p>
+  <div id="settings" class="section">
+    <h3>Settings</h3>
+    <p>Personalize your experience! (Just kidding, none of this works.)</p>
+    <div class="toggle">Dark Mode: Coming Soon</div>
+    <div class="toggle">Productivity Alerts: Not Implemented</div>
+    <div class="toggle">Auto-Snooze Emails: Concept Only</div>
+    <div class="toggle">Nap Timer Sync: Patent Pending (lol)</div>
   </div>
 
   <div class="footer">
