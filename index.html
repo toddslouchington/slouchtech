@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SlouchTech™</title>
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/1/17/Emoji_u1f634.svg" type="image/svg+xml">
   <style>
     body {
       font-family: sans-serif;
@@ -16,85 +17,99 @@
       font-size: 3rem;
       margin-bottom: 0.5em;
     }
-    h2 {
-      font-size: 1.5rem;
-      color: #888;
+    nav {
       margin-bottom: 2em;
     }
-    .product {
-      margin-bottom: 3em;
-    }
-    button {
-      background-color: #d4af37;
-      border: none;
-      padding: 12px 24px;
-      font-size: 1rem;
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #666;
+      font-weight: bold;
+      background: #eee;
+      padding: 5px 10px;
       border-radius: 6px;
-      cursor: pointer;
+    }
+    .section {
+      display: none;
+    }
+    .section.active {
+      display: block;
     }
     .footer {
       margin-top: 4em;
       color: #aaa;
       font-size: 0.9rem;
     }
-    .bio, .quote, .team {
-      margin-top: 3em;
-      padding: 1em;
-      background: #fff;
-      border-radius: 12px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    .quote-text {
-      font-style: italic;
-      color: #666;
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
     }
   </style>
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+    window.onload = () => showSection('contact');
+  </script>
 </head>
 <body>
   <h1>SlouchTech™</h1>
   <h2>Because Sitting Up Straight Was Never the Plan</h2>
 
-  <div class="product">
-    <h3>NudgeMeNot</h3>
-    <p>The anti-productivity app for people who gave up trying. Sarcastic reminders, insulting quotes, and fake motivation await.</p>
-    <button onclick="alert('You joined the waitlist. Or didn’t. Whatever.')">Join the Waitlist</button>
+  <nav>
+    <a href="#" onclick="showSection('contact')">Contact</a>
+    <a href="#" onclick="showSection('investors')">Investors</a>
+    <a href="#" onclick="showSection('terms')">Terms</a>
+    <a href="#" onclick="showSection('privacy')">Privacy</a>
+    <a href="#" onclick="showSection('unsubscribe')">Unsubscribe</a>
+  </nav>
+
+  <div id="contact" class="section">
+    <h3>Contact Us</h3>
+    <p>We added this form to look professional. It doesn't actually send anywhere.</p>
+    <form onsubmit="event.preventDefault(); alert('Thanks for reaching out. We won’t be in touch.');">
+      <input type="text" placeholder="Your Name (optional, obviously)">
+      <input type="email" placeholder="Email (fake is fine)">
+      <textarea placeholder="Your Message (we won't read it)"></textarea>
+      <button type="submit">Submit (to the void)</button>
+    </form>
   </div>
 
-  <div class="product">
-    <h3>ZoomAway</h3>
-    <p>Auto-joins meetings, pretends to glitch, exits gracefully. A hero in the form of fake lag.</p>
+  <div id="investors" class="section">
+    <h3>Investor Relations</h3>
+    <p>If you're an investor looking to get involved with SlouchTech™, please consider the following:</p>
+    <div style="font-size: 4rem;">🤷</div>
+    <p>We don’t have a business plan. We barely have a plan. But you’re welcome to throw money at us. Email <a href="mailto:money@uberlazy.lol">money@uberlazy.lol</a> if you insist.</p>
   </div>
 
-  <div class="product">
-    <h3>SleepDeck™</h3>
-    <p>Task manager that replaces your to-do list with suggested nap times. Now with optional guilt-free mode.</p>
+  <div id="terms" class="section">
+    <h3>Terms of Service</h3>
+    <p><strong>1. No Promises:</strong> We make no guarantees that anything will work, ever. That's part of the charm.</p>
+    <p><strong>2. User Responsibility:</strong> If this site causes productivity, that’s on you. Not our fault.</p>
+    <p><strong>3. Intellectual Property:</strong> Everything here is legally dubious and morally lazy.</p>
+    <p><strong>4. Cookies:</strong> We don’t use them. But we do like actual cookies.</p>
+    <p><strong>5. Updates:</strong> This document is updated whenever we feel like it. Probably never.</p>
+    <p>If you’ve read this far, you deserve a nap. That’s the real service we offer.</p>
   </div>
 
-  <div class="product">
-    <h3>StatusQuo CRM</h3>
-    <p>Customer Relationship Management for people who hate following up. Auto-sends vague updates and polite ghosting emails.</p>
+  <div id="privacy" class="section">
+    <h3>Privacy Policy</h3>
+    <p><strong>We Respect Your Privacy:</strong> We just don’t really track anything, mostly because we don’t know how.</p>
+    <p><strong>No Data Collection:</strong> We wouldn’t know what to do with your data even if we had it.</p>
+    <p><strong>Analytics:</strong> We don't use analytics tools. We're not even sure what people would want to know. Bounce rate? Probably high.</p>
+    <p><strong>Cookies (Still Not the Browser Kind):</strong> Just cookies we snack on while pretending to debug something.</p>
+    <p><em>If anything here changes, we probably won’t tell you.</em></p>
   </div>
 
-  <div class="bio">
-    <h3>About Todd Slouchington</h3>
-    <p>Todd founded SlouchTech™ on February 30th, 1993, after realizing the only thing more exhausting than failure is effort. He now leads innovation in the do-nothing space from his beanbag chair.</p>
-  </div>
-
-  <div class="quote">
-    <h3>Quote of the Day</h3>
-    <p class="quote-text">“You miss 100% of the naps you don’t take.”</p>
-  </div>
-
-  <div class="team">
-    <h3>Our (Fake) Team</h3>
-    <ul style="list-style-type: none; padding: 0;">
-      <li>📦 Chief Vibe Architect – Mysteriously absent</li>
-      <li>🛋️ VP of Horizontal Integration – Currently horizontal</li>
-      <li>📬 Customer Apathy Specialist – Still hasn’t replied</li>
-    </ul>
+  <div id="unsubscribe" class="section">
+    <h3>Unsubscribe</h3>
+    <p>You have successfully unsubscribed. We’re not sure from what, but it’s over now.</p>
+    <p>If this was a mistake, don’t worry—there’s no going back. Freedom achieved. 🕊️</p>
   </div>
 
   <div class="footer">
